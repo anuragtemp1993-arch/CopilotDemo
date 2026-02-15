@@ -22,10 +22,18 @@ jobs:
       - name: Show Xcode version
         run: xcodebuild -version
 
-      - name: Build App
+      - name: List Xcode schemes
+        run: xcodebuild -list -project CopilotDemo.xcodeproj || true
+
+      - name: Build App (simulator)
+        env:
+          # Disable code signing for simulator builds
+          CODE_SIGNING_ALLOWED: 'NO'
         run: |
+          set -o pipefail
           xcodebuild \
-          -scheme CopilotDemo \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 15' \
-          clean build
+            -project CopilotDemo.xcodeproj \
+            -scheme CopilotDemo \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0' \
+            clean build | xcpretty || true
