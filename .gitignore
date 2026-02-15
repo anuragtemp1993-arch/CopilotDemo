@@ -1,0 +1,19 @@
+//
+//  Untitled.swift
+//  CopilotDemo
+//
+//  Created by Anurag Vishnoi on 15/02/26.
+//
+
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
+
+# Swift Package
+.build/
