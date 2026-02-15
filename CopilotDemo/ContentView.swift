@@ -9,11 +9,17 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @StateObject private var loginVM = LoginViewModel()
+
     var body: some View {
-        NavigationView {
-            LoginView()
+        if loginVM.isLoggedIn, let user = loginVM.currentUser {
+            DashboardView(user: user, loginVM: loginVM)
+        } else {
+            NavigationView {
+                LoginView(viewModel: loginVM)
+            }
+            .navigationViewStyle(.stack)
         }
-        .navigationViewStyle(.stack)
     }
 }
 

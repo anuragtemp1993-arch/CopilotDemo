@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var vm: LoginViewModel
+    @ObservedObject var viewModel: LoginViewModel
     @State private var showPassword: Bool = false
     @State private var rememberMe: Bool = false
 
-    public init(service: AuthServiceProtocol = MockAuthService()) {
-        _vm = StateObject(wrappedValue: LoginViewModel(service: service))
+    public init(viewModel: LoginViewModel? = nil, service: AuthServiceProtocol = MockAuthService()) {
+        self.viewModel = viewModel ?? LoginViewModel(service: service)
     }
 
     var body: some View {
@@ -63,7 +63,7 @@ struct LoginView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "envelope.fill")
                             .foregroundStyle(.white.opacity(0.95))
-                        TextField("Username", text: $vm.email)
+                        TextField("Username", text: $viewModel.email)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
@@ -79,9 +79,9 @@ struct LoginView: View {
                             .foregroundStyle(.white.opacity(0.95))
                         Group {
                             if showPassword {
-                                TextField("Password", text: $vm.password)
+                                TextField("Password", text: $viewModel.password)
                             } else {
-                                SecureField("Password", text: $vm.password)
+                                SecureField("Password", text: $viewModel.password)
                             }
                         }
                         .foregroundStyle(.white)
@@ -116,7 +116,7 @@ struct LoginView: View {
 
                 // Sign in button
                 Button(action: {
-                    vm.submit()
+                    viewModel.submit()
                     // TODO: persist rememberMe if desired
                 }) {
                     Text("Sign in")
@@ -125,18 +125,18 @@ struct LoginView: View {
                         .padding(.vertical, 14)
                         .background(
                             Capsule()
-                                .fill(vm.canSubmit ? Color(.systemCyan) : Color(.systemCyan).opacity(0.6))
+                                .fill(viewModel.canSubmit ? Color(.systemCyan) : Color(.systemCyan).opacity(0.6))
                         )
                         .foregroundStyle(.white)
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 8)
-                .disabled(!vm.canSubmit)
+                .disabled(!viewModel.canSubmit)
 
                 // Forgot password link
                 Button(action: {
-                    vm.alertMessage = "Forgot password tapped"
-                    vm.showAlert = true
+                    viewModel.alertMessage = "Forgot password tapped"
+                    viewModel.showAlert = true
                 }) {
                     Text("Forgot password?")
                         .font(.system(size: 15, weight: .regular))
@@ -149,10 +149,10 @@ struct LoginView: View {
             }
             .padding(.vertical, 24)
         }
-        .alert("", isPresented: $vm.showAlert) {
+        .alert("", isPresented: $viewModel.showAlert) {
             Button("OK", role: .cancel) { }
         } message: {
-            Text(vm.alertMessage)
+            Text(viewModel.alertMessage)
         }
     }
 }

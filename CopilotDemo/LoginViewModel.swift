@@ -14,10 +14,12 @@ final class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var showAlert: Bool = false
     @Published var alertMessage: String = ""
+    @Published var isLoggedIn: Bool = false
+    @Published var currentUser: User?
     private let service: AuthServiceProtocol
 
     public init(service: AuthServiceProtocol? = nil) {
-        self.service = service ?? AuthService()
+        self.service = service ?? MockAuthService()
     }
 
     var isEmailValid: Bool {
@@ -54,8 +56,13 @@ final class LoginViewModel: ObservableObject {
     private func login() async {
         do {
             let user = try await service.fetchUser(email: email, password: password)
+            self.currentUser = user
+            self.isLoggedIn = true
             alertMessage = "Welcome, \(user.name ?? user.email)"
             showAlert = true
+            // Clear form after successful login
+            self.email = ""
+            self.password = ""
         } catch {
             alertMessage = "Login failed: \(error.localizedDescription)"
             showAlert = true
