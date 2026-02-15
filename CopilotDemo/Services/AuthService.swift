@@ -2,12 +2,11 @@
 //  AuthService.swift
 //  CopilotDemo
 //
-//  Created by Copilot on 14/02/26.
+//  Created by Copilot on 15/02/26.
 //
 
 import Foundation
 
-// Simple user model used by the service
 public struct User: Codable {
     public let id: Int?
     public let name: String?
@@ -15,12 +14,10 @@ public struct User: Codable {
     public let token: String?
 }
 
-// Protocol defines the API surface for authentication-related network calls.
 public protocol AuthServiceProtocol {
     func fetchUser(email: String, password: String) async throws -> User
 }
 
-// Concrete implementation using URLSession. Replace endpoint with your backend.
 public final class AuthService: AuthServiceProtocol {
     public init() {}
 
@@ -30,7 +27,6 @@ public final class AuthService: AuthServiceProtocol {
     }
 
     public func fetchUser(email: String, password: String) async throws -> User {
-        // Example endpoint — replace with real API.
         guard let url = URL(string: "https://example.com/api/login") else {
             throw URLError(.badURL)
         }
@@ -55,13 +51,12 @@ public final class AuthService: AuthServiceProtocol {
     }
 }
 
-// A lightweight mock service for local testing and previews.
 public final class MockAuthService: AuthServiceProtocol {
     public init() {}
 
     public func fetchUser(email: String, password: String) async throws -> User {
         try await Task.sleep(nanoseconds: 300 * 1_000_000)
-        if email == "anuragtemp1993@gmail.com" && password == "password123" {
+        if email == "test@example.com" && password == "password123" {
             return User(id: 1, name: "Test User", email: email, token: "mock-token")
         }
         throw URLError(.userAuthenticationRequired)

@@ -6,13 +6,42 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		31EA98762F418FF90074ECD9 /* .gitignore in Sources */ = {isa = PBXBuildFile; fileRef = 31EA98752F418FF60074ECD9 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		3140D4A22F409CC8006DE78F /* CopilotDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopilotDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		31EA98752F418FF60074ECD9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		31EA98812F4192DD0074ECD9 /* Exceptions for "CopilotDemo" folder in "CopilotDemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				".github/workflow/ios-ci.yml",
+			);
+			target = 3140D4A12F409CC8006DE78F /* CopilotDemo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		31EA98822F4192DD0074ECD9 /* Exceptions for "CopilotDemo" folder in "Compile Sources" phase from "CopilotDemo" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 3140D49E2F409CC8006DE78F /* Sources */;
+			membershipExceptions = (
+				".github/workflow/ios-ci.yml",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3140D4A42F409CC8006DE78F /* CopilotDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				31EA98812F4192DD0074ECD9 /* Exceptions for "CopilotDemo" folder in "CopilotDemo" target */,
+				31EA98822F4192DD0074ECD9 /* Exceptions for "CopilotDemo" folder in "Compile Sources" phase from "CopilotDemo" target */,
+			);
 			path = CopilotDemo;
 			sourceTree = "<group>";
 		};
@@ -32,6 +61,7 @@
 		3140D4992F409CC8006DE78F = {
 			isa = PBXGroup;
 			children = (
+				31EA98752F418FF60074ECD9 /* .gitignore */,
 				3140D4A42F409CC8006DE78F /* CopilotDemo */,
 				3140D4A32F409CC8006DE78F /* Products */,
 			);
@@ -119,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31EA98762F418FF90074ECD9 /* .gitignore in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
